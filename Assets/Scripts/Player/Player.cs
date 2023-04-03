@@ -69,12 +69,16 @@ public class Player : MonoBehaviour
     {
         _move.Drag -= UpdateRotate;
         _look.Drag += UpdateRotate;
+
+        _playerAttack.StartAttack();
     }
     private void StopAttack()
     {
         _look.Drag -= UpdateRotate;
         _move.Drag += UpdateRotate;
         _entity.State.UpdateRot(_playerMove.MoveDirection);
+
+        _playerAttack.StopAttack();
     }
 
     #endregion

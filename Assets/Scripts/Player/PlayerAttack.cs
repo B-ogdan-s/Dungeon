@@ -1,24 +1,43 @@
-using Sirenix.OdinInspector;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] private PlayerAttackUI _attackUI;
-    [ShowInInspector] private IWeapon _weapon;
+    [SerializeField] private PlayerWeapon _playerWeapon;
 
-    private void OnTriggerEnter(Collider other)
+    private Coroutine _attackCoroutine;
+
+    private bool _isAttacking = true;
+
+    public void StartAttack()
     {
-        if(other.TryGetComponent(out WeaponPrezent weaponPrezent))
+        if (_playerWeapon.Weapon == null)
+            return;
+
+        _isAttacking = true;
+
+        if(_attackCoroutine == null)
         {
-            _attackUI.WeaponRaiseButtonEnable();
+            _attackCoroutine = StartCoroutine(Attack());
         }
     }
-
-    private void OnTriggerExit(Collider other)
+    public void StopAttack()
     {
-        if (other.TryGetComponent(out WeaponPrezent weaponPrezent))
+        _isAttacking = false;
+    }
+
+    private IEnumerator Attack()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+
+        do
         {
-            _attackUI.WeaponRaiseButtonDisable();
-        }
+            _playerWeapon.Weapon.Attack();
+            yield return new WaitForSecondsRealtime(_playerWeapon.Weapon.AttackPause);
+
+        } while (_isAttacking);
+
+        _attackCoroutine = null;
     }
 }

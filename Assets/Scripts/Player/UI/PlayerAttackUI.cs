@@ -5,9 +5,11 @@ public class PlayerAttackUI : MonoBehaviour
 {
     [SerializeField] private Button _weaponRaiseButton;
 
+    public event System.Action OnDownButton;
     private void Start()
     {
         _weaponRaiseButton.gameObject.SetActive(false);
+        _weaponRaiseButton.onClick.AddListener(() => OnDownButton?.Invoke());
     }
 
     public void WeaponRaiseButtonEnable()
