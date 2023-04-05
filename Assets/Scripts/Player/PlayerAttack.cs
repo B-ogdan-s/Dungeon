@@ -22,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
             _attackCoroutine = StartCoroutine(Attack());
         }
     }
+
     public void StopAttack()
     {
         _isAttacking = false;

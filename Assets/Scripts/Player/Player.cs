@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerMove _playerMove;
     [SerializeField] private PlayerAttack _playerAttack;
 
+    [SerializeField] private PlayerAttackNavigation _playerAttackNavigation;
+
     private Entity _entity;
 
     private void Start()
@@ -61,6 +63,15 @@ public class Player : MonoBehaviour
         Vector3 newDirection = new Vector3(direction.x, 0, direction.y);
         _entity.State.UpdateRot(newDirection);
     }
+
+    private void UpdateRotateForAttack(Vector2 direction)
+    {
+        Vector3 newDirection = new Vector3(direction.x, 0, direction.y);
+        Vector3 dir = _playerAttackNavigation.GetEnemyPos(newDirection);
+
+        _entity.State.UpdateRot(dir);
+    }
+
     #endregion
 
     #region Attack
@@ -68,15 +79,17 @@ public class Player : MonoBehaviour
     private void StartAttack()
     {
         _move.Drag -= UpdateRotate;
-        _look.Drag += UpdateRotate;
+        _look.Drag += UpdateRotateForAttack;
 
         _playerAttack.StartAttack();
     }
     private void StopAttack()
     {
-        _look.Drag -= UpdateRotate;
+        _look.Drag -= UpdateRotateForAttack;
         _move.Drag += UpdateRotate;
         _entity.State.UpdateRot(_playerMove.MoveDirection);
+
+        _playerAttackNavigation.StopNavigation();
 
         _playerAttack.StopAttack();
     }
@@ -86,7 +99,7 @@ public class Player : MonoBehaviour
     private void OnDestroy()
     {
         _move.Drag -= UpdateDirection;
-        _look.Drag -= UpdateRotate;
+        _look.Drag -= UpdateRotateForAttack;
         _move.PointerDown -= StartMove;
         _move.PointerUp -= StopMove;
 

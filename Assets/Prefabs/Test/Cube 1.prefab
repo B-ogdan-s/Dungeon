@@ -132,5 +132,5 @@ MonoBehaviour:
   _bullet: {fileID: 1983012570591985616, guid: 0d8a547190ace5a4185b13b01dc6550a, type: 3}
   _spawnBulletPositioin: {fileID: 8656075100522861634}
   _recharge: 0
-  _numBullet: 15
-  _corner: 22.5
+  _numBullet: 5
+  _corner: 30

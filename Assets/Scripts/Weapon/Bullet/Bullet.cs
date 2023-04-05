@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
 
     private Coroutine _liveCoroutine;
 
-    private void FixedUpdate()
+    private void Update()
     {
         transform.Translate(Vector3.forward * _speed * Time.fixedDeltaTime);
     }
