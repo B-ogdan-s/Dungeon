@@ -3656,7 +3656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095cbdf59996c024d902388a9c9d5d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapon: {fileID: 8656075101922339754, guid: 60b18bc217ae5c64c83d42e94aa2af2c, type: 3}
+  _weapon: {fileID: 8776735919263332099, guid: c962d761887fd734984bf6408f57cced, type: 3}
 --- !u!136 &1680382715
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4029,8 +4029,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1882609201}
-  - component: {fileID: 1882609204}
   - component: {fileID: 1882609203}
+  - component: {fileID: 1882609204}
   - component: {fileID: 1882609202}
   m_Layer: 0
   m_Name: GameObject (2)
